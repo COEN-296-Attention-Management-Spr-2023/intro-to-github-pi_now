@@ -78,7 +78,7 @@ def retrieve_item_ada_fruit(search_product):
             print(product_price)
             try:
                 #find scratcher info and add it to list
-                product_info.append((product_title, product_price, product_img, product_link, "Ada Fruit"))
+                product_info.append((search_product, product_title, product_price, product_img, product_link, "Ada Fruit"))
             except Exception as e:
                 print(e)
                 continue
@@ -156,7 +156,7 @@ def retrieve_item_pi_shop(search_product):
 
             try:
                 #find scratcher info and add it to list
-                product_info.append((product_title, product_price, product_img, product_link, "Pi Shop"))
+                product_info.append((search_product, product_title, product_price, product_img, product_link, "Pi Shop"))
             except Exception as e:
                 print(e)
                 continue
@@ -187,6 +187,8 @@ def scrape():
     if info:   information.append(info)
     #Storing all of the infomration for all of the Raspberry Pis in Pi Shop
     #information now holds all the info
+
+    return information
 
     #jsonify(information, 200)
 
