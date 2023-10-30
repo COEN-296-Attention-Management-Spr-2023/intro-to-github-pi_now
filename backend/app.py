@@ -1,6 +1,6 @@
 from flask import Flask, jsonify
 from flask_cors import CORS
-from Scrape import scrape
+from .Scrape import scrape
 
 app = Flask(__name__)
 CORS(app)
@@ -19,6 +19,7 @@ def deez():
 def data():
     info_json = {}
     for entry in scrape():
+        entry = list(entry[0])
         product_type = entry[0]
         product_info = entry[1:]
         if product_type not in info_json:
