@@ -15,7 +15,7 @@ const addResponseElement = (data = [], element) => {
 
     const url = document.createElement("a");
     url.className = "responseURL";
-    url.href = data[2];
+    url.href = data[3];
     url.textContent = "link";
     url.target = "_blank";
     newSearchResponse.appendChild(url);
@@ -26,8 +26,8 @@ const addResponseElement = (data = [], element) => {
 const addResponse = (data, resultElement) => {
     resultElement.removeChild(resultElement.firstChild);
     for (const [key, value] of Object.entries(data)){
-        arr = [];
-        for (x in value[x]){
+        var arr = []; //arr not defined
+        for (var x in value[x]){ //x not defined
             arr.push(value[x]);
         }
         arr.push(key);
@@ -57,7 +57,7 @@ document.getElementById("search-button").addEventListener("click", () =>{
     .then(data => {
         console.log(data);
         const jsonData = JSON.parse(data);
-        addResponses(jsonData, responseElement);
+        addResponse(jsonData, responseElement); //This was addResponses but i changed it to addResponse
     })
     .catch(error => {
         console.error('Error:', error);
