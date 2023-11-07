@@ -7,6 +7,9 @@ const addResponseElement = (data = [], element) => {
     title.className = "responseTitle";
     title.textContent = data[4]; //Product Name
     newSearchResponse.appendChild(title);
+    console.log[data[4]];
+    console.log[data[0]];
+    console.log[data[2]];
 
     const price = document.createElement("div");
     price.className = "responsePrice";
@@ -15,7 +18,7 @@ const addResponseElement = (data = [], element) => {
 
     const url = document.createElement("a");
     url.className = "responseURL";
-    url.href = data[3];
+    url.href = data[2];
     url.textContent = "link";
     url.target = "_blank";
     newSearchResponse.appendChild(url);
@@ -25,13 +28,18 @@ const addResponseElement = (data = [], element) => {
  
 const addResponse = (data, resultElement) => {
     resultElement.removeChild(resultElement.firstChild);
+    var arr = []; //arr not defined
     for (const [key, value] of Object.entries(data)){
-        var arr = []; //arr not defined
-        for (var x in value[x]){ //x not defined
-            arr.push(value[x]);
+        console.log("data for loop");
+        for (const x in value){ //x not defined
+            for(const y in value[x]){
+                arr.push(value[x][y]);
+                console.log("element added to data array");
+                console.log(value[x][y]);
+            }
+            arr.push(key);
+            addResponseElement(arr, resultElement);
         }
-        arr.push(key);
-        addResponseElement(arr, resultElement);
     }
 }
 
@@ -57,6 +65,19 @@ document.getElementById("search-button").addEventListener("click", () =>{
     .then(data => {
         console.log(data);
         const jsonData = JSON.parse(data);
+
+        chrome.storage.local.set({ myData: jsonData }, () => {
+            if (chrome.runtime.lastError) {
+              console.error('Error storing data:', chrome.runtime.lastError);
+            } else {
+              console.log('Data stored successfully');
+            }
+          });
+
+        chrome.storage.local.get({ myData: jsonData }).then((result) => {
+            console.log("Value is " + result.myData)
+        })
+
         addResponse(jsonData, responseElement); //This was addResponses but i changed it to addResponse
     })
     .catch(error => {
