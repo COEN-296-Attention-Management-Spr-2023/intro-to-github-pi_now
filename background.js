@@ -43,14 +43,13 @@ chrome.alarms.onAlarm.addListener((alarm) => {
                 chrome.storage.local.set({"rpi4": data}).then(() => {
                     console.log("Value is set from background script");
                 });
-                chrome.notifications.create({
+                chrome.notifications.create('CacheUpdate', {
                     type: 'basic',
                     iconUrl: 'pog-u-shocked.png',
                     title: 'My Extension',
                     message: 'Prices updated!!',
+                    priority: '2'
                 });
-                
-    
             }
         })
 
