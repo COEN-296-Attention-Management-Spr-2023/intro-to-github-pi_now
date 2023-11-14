@@ -32,11 +32,30 @@ chrome.alarms.onAlarm.addListener((alarm) => {
         return response.text(); 
     })
     .then(data => {
-        console.log(data);
-        const jsonData = JSON.parse(data);
-        chrome.storage.local.set({"rpi4": data}).then(() => {
-            console.log("Value is set from background script");
-        });
+
+        chrome.storage.local.get("rpi4").then((result) => {
+            console.log("old value")
+            console.log(result.rpi4);
+            console.log("new value")
+            console.log(data)
+            if(result.rpi4 === data) {
+                console.log("prices were updated!!")
+                chrome.storage.local.set({"rpi4": data}).then(() => {
+                    console.log("Value is set from background script");
+                });
+                chrome.notifications.create({
+                    type: 'basic',
+                    iconUrl: 'pog-u-shocked.png',
+                    title: 'My Extension',
+                    message: 'Prices updated!!',
+                });
+                
+    
+            }
+        })
+
+       
+
     })
     .catch(error => {
         console.error('Error:', error);
