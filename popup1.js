@@ -1,3 +1,26 @@
+fetch('http://127.0.0.1:5000/data', {method:'GET',mode:'no-cors'})
+.then(response => {
+    if (!response.ok) {
+        throw new Error('Network response was not ok');
+    }
+
+    chrome.alarms.create('check-prices-alarm', {
+        delayInMinutes: 2,
+        periodInMinutes: 2
+    });
+    return response.text();
+})
+.then(data => {
+    console.log(data);
+    chrome.storage.local.set({"rpi4": data}).then(() => {
+        console.log("Value is set from initial startup");
+    });
+})
+.catch(error => {
+    console.error("scrape didn't work?")
+    console.error('Error:', error);
+});
+
 
 const addResponseElement = (data = [], element) => {
     const newSearchResponse = document.createElement("div");
@@ -44,43 +67,30 @@ const addResponse = (data, resultElement) => {
 }
 
 document.getElementById("search-button").addEventListener("click", () =>{
+
     const responseElement = document.getElementById("response");
     while(responseElement.firstChild){
         responseElement.removeChild(response.firstChild);
     }
+
+
+  
     const newSearchResponse = document.createElement("div");
     newSearchResponse.textContent = "awaiting fetch response...";
     newSearchResponse.className = "wait message";
     responseElement.appendChild(newSearchResponse);
+    var json
+    chrome.storage.local.get("rpi4").then((result) => {
+        console.log("Attempting to access cache..." )
+        console.log("unparsed")
+        console.log(result.rpi4)
+        console.log("parsed")
+        console.log(JSON.parse(result.rpi4))
+        addResponse(JSON.parse(result.rpi4), responseElement)
+    })
     //test elements 
     //const temp = ["Gucci Bag","$6969","https://www.googleadservices.com/pagead/aclk?sa=L&ai=DChcSEwjuhP_08J6CAxUxzcIEHUUhCAsYABAAGgJwdg&gclid=Cj0KCQjwqP2pBhDMARIsAJQ0CzrVeFDSLlQWR2YnQt5mlDiOObxMihLnYL2-862g96XzCIe1nixNC7gaAgtKEALw_wcB&ohost=www.google.com&cid=CAESVuD2i-rr6Lmln0cKgW0VcBAdM2oaUUJ8lIT4HOAJij8vM4CA_mvsH8XeF2lGY6rtCeuAmz8SbGFouMDJMLHZMgRrgccz9xBfKbSA2XrMbnh-szpcJVTo&sig=AOD64_1sfhtk6FQdnVqapcIcE2ejNorTqA&q&adurl&ved=2ahUKEwjk0PT08J6CAxWaI0QIHRTnCyMQ0Qx6BAgOEAE&nis=2"]
-    //addResponseElement(temp, responseElement)
-    fetch('http://127.0.0.1:5000/data', {method:'GET',mode:'no-cors'})
-    .then(response => {
-        if (!response.ok) {
-            throw new Error('Network response was not ok');
-        }
-        return response.text(); 
-    })
-    .then(data => {
-        console.log(data);
-        const jsonData = JSON.parse(data);
-
-        chrome.storage.local.set({ myData: jsonData }, () => {
-            if (chrome.runtime.lastError) {
-              console.error('Error storing data:', chrome.runtime.lastError);
-            } else {
-              console.log('Data stored successfully');
-            }
-          });
-
-        chrome.storage.local.get({ myData: jsonData }).then((result) => {
-            console.log("Value is " + result.myData)
-        })
-
-        addResponse(jsonData, responseElement); //This was addResponses but i changed it to addResponse
-    })
-    .catch(error => {
-        console.error('Error:', error);
-    });
 });
+
+
+
