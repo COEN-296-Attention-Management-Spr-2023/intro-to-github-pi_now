@@ -1,20 +1,12 @@
-<!--<link href="popup.css" rel="stylesheet" type="text/css" />
-<script type="module" src="popup.js"></script>
-
-<div class="container">
-  <div>
-    <div class="title">Your bookmarks for this video</div>
-
-    <div class="bookmarks" id="bookmarks"></div>
-  </div>
-</div>-->
 <!DOCTYPE html>
 <html lang="en">
-<script type="module" src="popup1.js"></script>
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Chrome Extension Product Selector</title>
+    <link href="popup.css" rel="stylesheet" type="text/css" />
+    <script type="module" src="popup1.js"></script>
+    <!-- Add the styles for the dropdown here or in popup.css -->
     <style>
         body {
             font-family: Arial, sans-serif;
@@ -44,9 +36,83 @@
             margin-bottom: 10px;
             padding: 10px;
         }
+        /* Dropdown Menu Styles */
+        .dropdown {
+            position: relative;
+            display: inline-block;
+        }
+        .dropbtn {
+            background-color: #007bff;
+            color: white;
+            padding: 10px 15px;
+            font-size: 16px;
+            border: none;
+            cursor: pointer;
+            border-radius: 5px;
+        }
+        .dropdown-content {
+            display: none;
+            position: absolute;
+            background-color: #f1f1f1;
+            min-width: 200px;
+            box-shadow: 0 8px 16px 0 rgba(0,0,0,0.2);
+            z-index: 1;
+        }
+        .dropdown-content a {
+            color: black;
+            padding: 12px 16px;
+            text-decoration: none;
+            display: block;
+        }
+        .dropdown-content a:hover {
+            background-color: #ddd;
+        }
+        .dropdown:hover .dropdown-content {
+            display: block;
+        }
+        .dropdown-more {
+            position: relative;
+        }
+        .more-content {
+            display: none;
+            position: absolute;
+            left: 100%;
+            top: 0;
+            background-color: #f9f9f9;
+            min-width: 160px;
+            box-shadow: 0 8px 16px 0 rgba(0,0,0,0.2);
+        }
+        .dropdown-more:hover .more-content {
+            display: block;
+        }
     </style>
 </head>
 <body>
+    <!-- Dropdown Menu -->
+    <div class="dropdown">
+      <button class="dropbtn">Select Raspberry Pi Model</button>
+      <div class="dropdown-content">
+        <a href="#">Raspberry Pi 4</a>
+        <a href="#">Raspberry Pi 3</a>
+        <a href="#">Raspberry Pi Zero</a>
+        <div class="dropdown-more">
+          <a href="#" class="more">More</a>
+          <div class="more-content">
+            <a href="#">Raspberry Pi Pico</a>
+            <a href="#">Other Models</a>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Existing container and content -->
+    <div class="container">
+      <div>
+        <div class="title">Your bookmarks for this video</div>
+        <div class="bookmarks" id="bookmarks"></div>
+      </div>
+    </div>
+
     <div class="search-container">
         <h1>Chrome Extension Product Selector</h1>
         <label class="product-checkbox">
@@ -59,9 +125,7 @@
             <input type="checkbox" value="product3"> Product 3
         </label>
         <button id="search-button">Search</button>
-        <label id="response">
-
-        </label>
+        <label id="response"></label>
     </div>
 </body>
 </html>
