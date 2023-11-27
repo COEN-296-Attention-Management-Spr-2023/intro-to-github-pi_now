@@ -118,6 +118,9 @@ def retrieve_item_pi_shop(search_product):
     
     for product in product_grids[:4]:
             
+            if product is None:
+                 break
+            
             #right block in Pi Shop contains link to product page and product name
             right_block= product.find('div', class_= "right-block")
             
@@ -149,6 +152,9 @@ def retrieve_item_pi_shop(search_product):
             
            #pi_now23
 
+
+            
+
             product_price = right_block.find('span', class_='price--withoutTax').text
             
             #remove $
@@ -172,19 +178,19 @@ def scrape():
      
     #information = [('Raspberry Pi 4 Model B/4GB', '55.00', 'https://cdn11.bigcommerce.com/s-2fbyfnm8ev/images/stencil/300x300/products/641/2349/4GB-9004__53667.1560436241__58682.1561146139.jpg?c=2', 'https://www.pishop.us/product/raspberry-pi-4-model-b-4gb/', 'Pi Shop'), ('Raspberry Pi 4 Desktop Kit US - 8GB', '140.00', 'https://cdn11.bigcommerce.com/s-2fbyfnm8ev/images/stencil/300x300/products/944/3334/8GB_desktop__34274.1590607488.jpg?c=2', 'https://www.pishop.us/product/raspberry-pi-4-desktop-kit-us-8gb/', 'Pi Shop')]
     information = []
-    #info = retrieve_item_pi_shop("Raspberry Pi 3")
-    #if info:   information.append(info)
+    info = retrieve_item_pi_shop("Raspberry Pi 3")
+    if info:   information.append(info)
     info = retrieve_item_pi_shop("Raspberry Pi 4")
     if info:   information.append(info)
-    #info = retrieve_item_pi_shop("Raspberry Pi 5")
-    #if info:   information.append(info)
-    #info = retrieve_item_ada_fruit("Raspberry Pi 3")
-    #if info:   information.append(info)
+    info = retrieve_item_pi_shop("Raspberry Pi 5")
+    if info:   information.append(info)
+    info = retrieve_item_ada_fruit("Raspberry Pi 3")
+    if info:   information.append(info)
     info = retrieve_item_ada_fruit("Raspberry Pi 4")
     if info:   information.append(info)
 
-    #info = retrieve_item_ada_fruit("Raspberry Pi 5")
-    #if info:   information.append(info)
+    info = retrieve_item_ada_fruit("Raspberry Pi 5")
+    if info:   information.append(info)
     #Storing all of the infomration for all of the Raspberry Pis in Pi Shop
     #information now holds all the info
     print(information)

@@ -46,9 +46,9 @@ chrome.alarms.onAlarm.addListener((alarm) => {
                 chrome.notifications.create('CacheUpdate', {
                     type: 'basic',
                     iconUrl: 'pog-u-shocked.png',
-                    title: 'My Extension',
+                    title: 'Prices Updatded',
                     message: 'Prices updated!!',
-                    priority: '2'
+                    priority: 2
                 });
             }
         })

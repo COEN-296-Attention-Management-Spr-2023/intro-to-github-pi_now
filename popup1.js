@@ -1,3 +1,5 @@
+
+
 fetch('http://127.0.0.1:5000/data', {method:'GET',mode:'no-cors'})
 .then(response => {
     if (!response.ok) {
@@ -51,10 +53,10 @@ const addResponseElement = (data = [], element) => {
  
 const addResponse = (data, resultElement) => {
     resultElement.removeChild(resultElement.firstChild);
-    var arr = []; //arr not defined
     for (const [key, value] of Object.entries(data)){
         console.log("data for loop");
         for (const x in value){ //x not defined
+            var arr = []; //arr not defined
             for(const y in value[x]){
                 arr.push(value[x][y]);
                 console.log("element added to data array");
