@@ -38,9 +38,10 @@ const addResponseElement = (data = [], element) => {
     title.className = "responseTitle";
     title.textContent = data[4]; //Product Name
     newSearchResponse.appendChild(title);
-    console.log[data[4]];
-    console.log[data[0]];
-    console.log[data[2]];
+    console.log("Adding response elements:")
+    console.log(data[4]);
+    console.log(data[0]);
+    console.log(data[2]);
 
     const price = document.createElement("div");
     price.className = "responsePrice";
@@ -59,10 +60,11 @@ const addResponseElement = (data = [], element) => {
  
 const addResponse = (data, resultElement) => {
     resultElement.removeChild(resultElement.firstChild);
-    var arr = []; //arr not defined
     for (const [key, value] of Object.entries(data)){
+        
         console.log("data for loop");
         for (const x in value){ //x not defined
+            var arr = []; //arr not defined
             for(const y in value[x]){
                 arr.push(value[x][y]);
                 console.log("element added to data array");
@@ -70,6 +72,16 @@ const addResponse = (data, resultElement) => {
             }
             arr.push(key);
             addResponseElement(arr, resultElement);
+            /*
+            var checkbox = document.getElementById(arr[4]);
+            if(checkbox.checked){
+                console.log("This checkbox was checked");
+                console.log(key);
+                addResponseElement(arr, resultElement);
+            }
+            else{
+                console.log("it broke oof")
+            }*/
         }
     }
 }

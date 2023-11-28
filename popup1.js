@@ -23,7 +23,23 @@ fetch('http://127.0.0.1:5000/data', {method:'GET',mode:'no-cors'})
     console.error('Error:', error);
 });
 
-
+/*
+<div class="dropdown">
+      <button class="dropbtn">Select Raspberry Pi Model</button>
+      <div class="dropdown-content">
+        <a href="#">Raspberry Pi 4</a>
+        <a href="#">Raspberry Pi 3</a>
+        <a href="#">Raspberry Pi Zero</a>
+        <div class="dropdown-more">
+          <a href="#" class="more">More</a>
+          <div class="more-content">
+            <a href="#">Raspberry Pi Pico</a>
+            <a href="#">Other Models</a>
+          </div>
+        </div>
+      </div>
+    </div>
+*/
 const addResponseElement = (data = [], element) => {
     const newSearchResponse = document.createElement("div");
     newSearchResponse.className = "searchResponse";
@@ -62,8 +78,18 @@ const addResponse = (data, resultElement) => {
                 console.log("element added to data array");
                 console.log(value[x][y]);
             }
+            if (key == null) {
+                continue
+            }
             arr.push(key);
-            addResponseElement(arr, resultElement);
+            //addResponseElement(arr, resultElement);
+            console.log("Filtering this stuff:")
+            console.log(key)
+            console.log(arr[4])
+            var checkbox = document.getElementById(arr[4]);
+            if(checkbox.checked){
+                addResponseElement(arr, resultElement);
+            }
         }
     }
 }
