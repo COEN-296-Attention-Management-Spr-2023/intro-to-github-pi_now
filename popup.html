@@ -70,8 +70,29 @@
             border-radius: 5px;
             cursor: pointer;
         }
+        #close-button {
+            padding: 5px 8px;
+            font-size: 14px;
+            background-color: #fff;
+            border: none;
+            color: #007bff;
+            border-radius: 0px;
+            cursor: pointer;
+            margin-bottom: 10px;
+        }
+        #search-close-button {
+            padding: 5px 8px;
+            font-size: 14px;
+            background-color: #fff;
+            border: none;
+            color: #007bff;
+            border-radius: 0px;
+            cursor: pointer;
+            margin-top: 5px;
+            display: "none";
+        }
         .searchResponse{
-            display: flex;
+            display: grid;
             border: 1px solid #ccc;
             margin-bottom: 10px;
             padding: 10px;
@@ -140,12 +161,14 @@
         <label class="product-checkbox">
             <input type="checkbox" id="Raspberry Pi 5"> Raspberry Pi 5
         </label>
+        <button id="close-button">close</button>
         <button id="search-button">Search</button>
+        <button id="search-close-button">close</button>
         <label id="response">
 
         </label>
     </div>
-    <div class="dropdown">
+   <!-- <div class="dropdown">
         <button class="dropbtn">Hover over me!</button>
         <div class="dropdown-content">
           <a href="#">Raspberry Pi 4</a>
@@ -159,6 +182,6 @@
             </div>
           </div>
         </div>
-      </div>
+      </div>-->
 </body>
 </html>

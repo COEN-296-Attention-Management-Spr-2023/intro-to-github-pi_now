@@ -1,4 +1,5 @@
-
+var searchclose = document.getElementById("search-close-button");
+searchclose.style.display = "none";
 
 fetch('http://127.0.0.1:5000/data', {method:'GET',mode:'no-cors'})
 .then(response => {
@@ -93,16 +94,45 @@ const addResponse = (data, resultElement) => {
         }
     }
 }
-
+document.getElementById("close-button").addEventListener("click", () =>{
+    var content = document.getElementsByClassName("product-checkbox");
+    var close = document.getElementById("close-button");
+    if(close.innerHTML=="close"){
+        close.innerHTML="expand"
+        for (var i = 0; i < content.length; i++) {
+            content[i].style.display = "none";
+        }
+    }
+    else{
+        close.innerHTML="close"
+        for (var i = 0; i < content.length; i++) {
+            content[i].style.display = "block";
+        }
+    }
+});
+document.getElementById("search-close-button").addEventListener("click", () =>{
+    var content = document.getElementsByClassName("searchResponse");
+    var close = document.getElementById("search-close-button");
+    if(close.innerHTML=="close"){
+        close.innerHTML="expand"
+        for (var i = 0; i < content.length; i++) {
+            content[i].style.display = "none";
+        }
+    }
+    else{
+        close.innerHTML="close"
+        for (var i = 0; i < content.length; i++) {
+            content[i].style.display = "block";
+        }
+    }
+});
 document.getElementById("search-button").addEventListener("click", () =>{
-
     const responseElement = document.getElementById("response");
+    var searchclose = document.getElementById("search-close-button");
+    searchclose.style.display = "block";
     while(responseElement.firstChild){
         responseElement.removeChild(response.firstChild);
     }
-
-
-  
     const newSearchResponse = document.createElement("div");
     newSearchResponse.textContent = "awaiting fetch response...";
     newSearchResponse.className = "wait message";
@@ -117,7 +147,12 @@ document.getElementById("search-button").addEventListener("click", () =>{
         addResponse(JSON.parse(result.rpi4), responseElement)
     })
     //test elements 
-    //const temp = ["Gucci Bag","$6969","https://www.googleadservices.com/pagead/aclk?sa=L&ai=DChcSEwjuhP_08J6CAxUxzcIEHUUhCAsYABAAGgJwdg&gclid=Cj0KCQjwqP2pBhDMARIsAJQ0CzrVeFDSLlQWR2YnQt5mlDiOObxMihLnYL2-862g96XzCIe1nixNC7gaAgtKEALw_wcB&ohost=www.google.com&cid=CAESVuD2i-rr6Lmln0cKgW0VcBAdM2oaUUJ8lIT4HOAJij8vM4CA_mvsH8XeF2lGY6rtCeuAmz8SbGFouMDJMLHZMgRrgccz9xBfKbSA2XrMbnh-szpcJVTo&sig=AOD64_1sfhtk6FQdnVqapcIcE2ejNorTqA&q&adurl&ved=2ahUKEwjk0PT08J6CAxWaI0QIHRTnCyMQ0Qx6BAgOEAE&nis=2"]
+    const temp = ["$6969","","https://www.googleadservices.com/pagead/aclk?sa=L&ai=DChcSEwjuhP_08J6CAxUxzcIEHUUhCAsYABAAGgJwdg&gclid=Cj0KCQjwqP2pBhDMARIsAJQ0CzrVeFDSLlQWR2YnQt5mlDiOObxMihLnYL2-862g96XzCIe1nixNC7gaAgtKEALw_wcB&ohost=www.google.com&cid=CAESVuD2i-rr6Lmln0cKgW0VcBAdM2oaUUJ8lIT4HOAJij8vM4CA_mvsH8XeF2lGY6rtCeuAmz8SbGFouMDJMLHZMgRrgccz9xBfKbSA2XrMbnh-szpcJVTo&sig=AOD64_1sfhtk6FQdnVqapcIcE2ejNorTqA&q&adurl&ved=2ahUKEwjk0PT08J6CAxWaI0QIHRTnCyMQ0Qx6BAgOEAE&nis=2","","Gucci Bag"]
+    const temp2 = ["$420","","https://www.googleadservices.com/pagead/aclk?sa=L&ai=DChcSEwjuhP_08J6CAxUxzcIEHUUhCAsYABAAGgJwdg&gclid=Cj0KCQjwqP2pBhDMARIsAJQ0CzrVeFDSLlQWR2YnQt5mlDiOObxMihLnYL2-862g96XzCIe1nixNC7gaAgtKEALw_wcB&ohost=www.google.com&cid=CAESVuD2i-rr6Lmln0cKgW0VcBAdM2oaUUJ8lIT4HOAJij8vM4CA_mvsH8XeF2lGY6rtCeuAmz8SbGFouMDJMLHZMgRrgccz9xBfKbSA2XrMbnh-szpcJVTo&sig=AOD64_1sfhtk6FQdnVqapcIcE2ejNorTqA&q&adurl&ved=2ahUKEwjk0PT08J6CAxWaI0QIHRTnCyMQ0Qx6BAgOEAE&nis=2","","Yeezees"]
+    const temp3 = ["$8","","https://www.googleadservices.com/pagead/aclk?sa=L&ai=DChcSEwjuhP_08J6CAxUxzcIEHUUhCAsYABAAGgJwdg&gclid=Cj0KCQjwqP2pBhDMARIsAJQ0CzrVeFDSLlQWR2YnQt5mlDiOObxMihLnYL2-862g96XzCIe1nixNC7gaAgtKEALw_wcB&ohost=www.google.com&cid=CAESVuD2i-rr6Lmln0cKgW0VcBAdM2oaUUJ8lIT4HOAJij8vM4CA_mvsH8XeF2lGY6rtCeuAmz8SbGFouMDJMLHZMgRrgccz9xBfKbSA2XrMbnh-szpcJVTo&sig=AOD64_1sfhtk6FQdnVqapcIcE2ejNorTqA&q&adurl&ved=2ahUKEwjk0PT08J6CAxWaI0QIHRTnCyMQ0Qx6BAgOEAE&nis=2","","Grapes"]
+    addResponseElement(temp, responseElement);
+    addResponseElement(temp2, responseElement);
+    addResponseElement(temp3, responseElement);
 });
 
 
